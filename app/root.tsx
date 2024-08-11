@@ -29,20 +29,20 @@ import tailwindStyles from "./tailwind.css"
 //import type {SideBarItem, SidebarGroup} from '~/utils/docs.server';
 import Container from "~/components/layout/Container";
 
-import {getDomainUrl, removeTrailingSlash} from '~/utils'
+import { getDomainUrl, removeTrailingSlash } from '~/utils'
 
 import config from '~/docs.config';
-import { getSeo}  from '~/seo'
+import { getSeo } from '~/seo'
 
 export const meta: V2_MetaFunction = ({ data, matches }) => {
-  if(!data) return [];
+  if (!data) return [];
 
   return [
     getSeo({
       title: config.title,
       description: config.description,
       url: data.canonical ? data.canonical : '',
-    }),  
+    }),
   ]
 }
 
@@ -62,7 +62,7 @@ export type LoaderData = {
 
 export const links: LinksFunction = () => [
   { rel: "preconnect", href: "//fonts.gstatic.com", crossOrigin: "anonymous" },
-  {rel: "stylesheet", href: tailwindStyles},
+  { rel: "stylesheet", href: tailwindStyles },
   { rel: "stylesheet", href: "//fonts.googleapis.com/css?family=Work+Sans:300,400,600,700&amp;lang=en" },
 ]
 
@@ -135,7 +135,7 @@ export function ErrorBoundary() {
   let stacktrace;
 
   // when true, this is what used to go to `CatchBoundary`
-  if ( error.status === 404 ) {
+  if (error.status === 404) {
     status = 404;
     message = 'Page Not Found';
   } else if (error instanceof Error) {

@@ -1,37 +1,13 @@
-import type {
-	LoaderArgs,
-	V2_MetaFunction,
-	HeadersFunction,
-} from "@vercel/remix";
-import { json } from '@vercel/remix';
-import { useLoaderData } from '@remix-run/react'
-
-import invariant from "tiny-invariant";
-import { getContent } from "~/utils/blog.server";
+import { V2_MetaFunction, json, LoaderArgs, SerializeFrom} from '@vercel/remix';
+import { Link,  useLoaderData } from "@remix-run/react";
+import { BlogPost as BlogPostType } from '~/types';
+import { getContent } from '~/utils/blog.server';
+import BlogPost from '~/components/BlogPost';
 import { CacheControl } from "~/utils/cache-control.server";
 import { getSeo } from "~/seo";
 
 import { MarkdownView } from "~/components/Markdown";
 import { parseMarkdown } from "~/utils/markdoc.server";
-
-export const loader = async ({params}: LoaderArgs) => {
-	const files = await getContent(`pages/index`);
-	let post = files && parseMarkdown(files[0].content);
-
-	invariant(post, "Not found");
-
-	return json({post}, {
-		headers: {
-			"Cache-Control": new CacheControl("swr").toString(),
-		}
-	})
-}
-
-export const headers: HeadersFunction = ({loaderHeaders}) => {
-	return {
-		'Cache-Control': loaderHeaders.get('Cache-Control')!
-	}
-}
 
 export const meta: V2_MetaFunction = ({ data, matches }) => {
 	if(!data) return [];
@@ -40,14 +16,27 @@ export const meta: V2_MetaFunction = ({ data, matches }) => {
 
 	return [
 		getSeo({
-			title: data.post.frontmatter.meta.title,
-			description: data.post.frontmatter.meta.description,
+			title: 'Docs',
+			description: 'Docs',
 			url: `${parentData[0].requestInfo.url}`,
 		}),  
 	]
 }
 
-export default function BlogPost() {
+export let loader = async function({}: LoaderArgs) {
+  const files = await getContent(`docs/index`);
+  let post = files && parseMarkdown(files[0].content);
+
+  return json({
+    post
+  }, {
+    headers: {
+      "Cache-Control": new CacheControl("swr").toString(),
+    }
+  });
+}
+
+export default function Index() {
 	const {post} = useLoaderData<typeof loader>();
 
 	return (
