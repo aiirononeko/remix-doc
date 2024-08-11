@@ -7,7 +7,7 @@ import { useFetcher } from "@remix-run/react";
 import { loader } from "~/routes/actions/search";
 
 function classNames(...classes) {
-    return classes.filter(Boolean).join(' ')
+  return classes.filter(Boolean).join(' ')
 }
 
 export function SearchPalette({ open, setOpen }) {
@@ -25,7 +25,7 @@ export function SearchPalette({ open, setOpen }) {
 
   useEffect(
     function getFilteredPosts() {
-        console.log(query);
+      console.log(query);
       load(`/actions/search?term=${query}`);
     },
     [load, query]

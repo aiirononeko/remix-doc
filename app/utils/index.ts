@@ -1,7 +1,7 @@
 import * as React from 'react'
-import type {HeadersFunction} from '@vercel/remix'
+import type { HeadersFunction } from '@vercel/remix'
 import * as dateFns from 'date-fns'
-import type {NonNullProperties} from '~/types'
+import type { NonNullProperties } from '~/types'
 import { camelize, underscore } from "inflected";
 
 const DEFAULT_REDIRECT = "/";
@@ -22,7 +22,7 @@ export function safeRedirect(
 }
 
 const useSSRLayoutEffect =
-  typeof window === 'undefined' ? () => {} : React.useLayoutEffect
+  typeof window === 'undefined' ? () => { } : React.useLayoutEffect
 
 function formatTime(seconds: number) {
   return dateFns.format(dateFns.addSeconds(new Date(0), seconds), 'mm:ss')
@@ -34,12 +34,12 @@ function formatAbbreviatedNumber(num: number) {
   return num < 1_000
     ? formatNumber(num)
     : num < 1_000_000
-    ? `${formatNumber(Number((num / 1_000).toFixed(2)))}k`
-    : num < 1_000_000_000
-    ? `${formatNumber(Number((num / 1_000_000).toFixed(2)))}m`
-    : num < 1_000_000_000_000
-    ? `${formatNumber(Number((num / 1_000_000_000).toFixed(2)))}b`
-    : 'a lot'
+      ? `${formatNumber(Number((num / 1_000).toFixed(2)))}k`
+      : num < 1_000_000_000
+        ? `${formatNumber(Number((num / 1_000_000).toFixed(2)))}m`
+        : num < 1_000_000_000_000
+          ? `${formatNumber(Number((num / 1_000_000_000).toFixed(2)))}b`
+          : 'a lot'
 }
 
 function formatDate(dateString: string) {
@@ -99,14 +99,13 @@ function removeTrailingSlash(s: string) {
   return s.endsWith('/') ? s.slice(0, -1) : s
 }
 
-function getDisplayUrl(requestInfo?: {origin: string; path: string}) {
+function getDisplayUrl(requestInfo?: { origin: string; path: string }) {
   return getUrl(requestInfo).replace(/^https?:\/\//, '');
 }
 
-function getUrl(requestInfo?: {origin: string; path: string}) {
+function getUrl(requestInfo?: { origin: string; path: string }) {
   return removeTrailingSlash(
-    `${requestInfo?.origin ?? 'localhost'}${
-      requestInfo?.path ?? ''
+    `${requestInfo?.origin ?? 'localhost'}${requestInfo?.path ?? ''
     }`,
   )
 }
@@ -165,7 +164,7 @@ function useDebounce<Callback extends (...args: Array<unknown>) => unknown>(
   )
 }
 
-const reuseUsefulLoaderHeaders: HeadersFunction = ({loaderHeaders}) => {
+const reuseUsefulLoaderHeaders: HeadersFunction = ({ loaderHeaders }) => {
   const headers = new Headers()
   const usefulHeaders = ['Cache-Control', 'Vary', 'Server-Timing']
   for (const headerName of usefulHeaders) {
@@ -193,9 +192,9 @@ function useDoubleCheck() {
     const onClick: JSX.IntrinsicElements['button']['onClick'] = doubleCheck
       ? undefined
       : e => {
-          e.preventDefault()
-          setDoubleCheck(true)
-        }
+        e.preventDefault()
+        setDoubleCheck(true)
+      }
 
     return {
       ...props,
@@ -204,14 +203,14 @@ function useDoubleCheck() {
     }
   }
 
-  return {doubleCheck, getButtonProps}
+  return { doubleCheck, getButtonProps }
 }
 
 
 /**
  * Wrap a value in a resolved Promise returning it
  */
- export function resolved<Value>(value: Value): Promise<Value> {
+export function resolved<Value>(value: Value): Promise<Value> {
   return Promise.resolve(value);
 }
 
@@ -253,7 +252,7 @@ export function hasOwn<This extends Record<string, unknown>>(
  * A function that does nothing
  */
 // eslint-disable-next-line @typescript-eslint/no-empty-function
-export function noop(): void {}
+export function noop(): void { }
 
 /**
  * Check if the current runtime of the code is server or browser

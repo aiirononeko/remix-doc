@@ -77,13 +77,13 @@ const navigation = {
       name: 'RSS',
       href: '/rss.xml',
       icon: (props) => (
-        <RssIcon className="h-6 w-6 ml-2 text-orange-500"/> 
+        <RssIcon className="h-6 w-6 ml-2 text-orange-500" />
       )
     },
   ],
 }
 
-export default function Footer () {
+export default function Footer() {
   return (
     <footer className="">
       <div className="max-w-7xl mx-auto py-12 px-4 overflow-hidden sm:px-6 lg:px-8">
@@ -92,7 +92,7 @@ export default function Footer () {
           {navigation.main.map((item) => (
             <div key={item.name} className="px-5 py-2">
               <Link to={item.href} className="text-base text-gray-500 hover:text-gray-900">
-              {item.name}
+                {item.name}
               </Link>
             </div>
           ))}
@@ -109,6 +109,6 @@ export default function Footer () {
           &copy; {new Date().getFullYear()} Remix Docs. All rights reserved.
         </p>
       </div>
-  </footer>
+    </footer>
   )
 }

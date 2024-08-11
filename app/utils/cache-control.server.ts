@@ -47,7 +47,7 @@ export class CacheControl {
   }
 
   toString() {
-    let result:string[] = [];
+    let result: string[] = [];
 
     if (this.cacheability) result.push(this.cacheability);
 

@@ -76,39 +76,39 @@ export default function MobileNavigation() {
             </Link>
           </div>
           <ul
-                role="list"
-                className="mt-2 space-y-2 lg:mt-4 lg:space-y-4"
-              >
-          <li  className="relative">
-            <NavLink 
+            role="list"
+            className="mt-2 space-y-2 lg:mt-4 lg:space-y-4"
+          >
+            <li className="relative">
+              <NavLink
                 to="/"
-                prefetch="intent" 
+                prefetch="intent"
                 aria-label="Home"
-                className={({ isActive }) =>  clsx(
+                className={({ isActive }) => clsx(
                   'block w-full pl-3.5',
                   isActive
-                  ? 'font-semibold text-sky-500 before:bg-sky-500'
-                  : 'text-slate-500 before:hidden before:bg-slate-300 hover:text-slate-600 hover:before:block dark:text-slate-400 dark:before:bg-slate-700 dark:hover:text-slate-300'
-                )}  
-            >Home</NavLink>
-          </li>
-          {config.nav && config.nav.map( nav => (
-            <li key={nav.link} className="relative">
-              <NavLink 
-                  to={nav.link} 
-                  prefetch="intent" 
-                  aria-label={nav.link}
-                  className={({ isActive }) =>  clsx(
-                    'block w-full pl-3.5',
-                    isActive
                     ? 'font-semibold text-sky-500 before:bg-sky-500'
                     : 'text-slate-500 before:hidden before:bg-slate-300 hover:text-slate-600 hover:before:block dark:text-slate-400 dark:before:bg-slate-700 dark:hover:text-slate-300'
-                  )}  
-              >
-                  {nav.text}
-              </NavLink>
+                )}
+              >Home</NavLink>
             </li>
-          ))}
+            {config.nav && config.nav.map(nav => (
+              <li key={nav.link} className="relative">
+                <NavLink
+                  to={nav.link}
+                  prefetch="intent"
+                  aria-label={nav.link}
+                  className={({ isActive }) => clsx(
+                    'block w-full pl-3.5',
+                    isActive
+                      ? 'font-semibold text-sky-500 before:bg-sky-500'
+                      : 'text-slate-500 before:hidden before:bg-slate-300 hover:text-slate-600 hover:before:block dark:text-slate-400 dark:before:bg-slate-700 dark:hover:text-slate-300'
+                  )}
+                >
+                  {nav.text}
+                </NavLink>
+              </li>
+            ))}
           </ul>
           <Navigation navigation={config.sidebar} className="mt-5 px-1" />
         </Dialog.Panel>
